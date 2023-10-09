@@ -1,21 +1,28 @@
 #!/bin/bash
 
-echo && echo "CHECKSUM VERIFIER" && echo
-printf "Enter checksum from website: " && read sha
-printf "Enter File Path: " && read fpath
+bold=$(tput bold)
+r=`tput setaf 1`
+g=`tput setaf 2`
+b=`tput setaf 4`
+y=`tput setaf 3`
+re=`tput sgr0`
+
+echo && echo "${bold}${b}CHECKSUM VERIFIER${re}" && echo
+printf "${bold}Enter checksum from website: ${re}" && read sha
+printf "${bold}Enter File Path: ${re}" && read fpath
 
 chk=$(sha256sum $fpath | cut -d " " -f 1 )
 echo
 
-printf "Stored HASH   : " && echo $sha
-printf "Generated HASH: " && echo $chk
+printf "${bold}Stored HASH   : " && echo ${y}$sha${re}
+printf "${bold}Generated HASH: " && echo ${y}$chk${re}
 echo
 
 if [ "$sha" == "$chk" ]
 then
-	echo "Checksums match !"
+	echo "${bold}${g}SUCCESS: Checksums match !${re}"
 else
-	echo "CRITICAL WARNING: Checksums don't match !!"
+	echo "${bold}${r}CRITICAL WARNING: Checksums don't match !!${re}"
 fi
 
 #EOF#
