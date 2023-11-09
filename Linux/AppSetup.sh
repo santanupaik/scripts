@@ -51,8 +51,6 @@ if [ $dans == y ] || [ $dans == Y ]; then
    adb shell pm uninstall -k --user 0 com.android.stk
    printf "Removing Android System Intelligence... "
    adb shell pm uninstall -k --user 0 com.google.android.as
-   printf "Removing Gamespace...                   "
-   adb shell pm uninstall -k --user 0 io.chaldeaprjkt.gamespace
    printf "Removing Google location History...     "
    adb shell pm uninstall -k --user 0 com.google.android.gms.location.history
    printf "Removing Google Text to Speech...       "
@@ -67,6 +65,8 @@ if [ $dans == y ] || [ $dans == Y ]; then
    adb shell pm uninstall -k --user 0 it.vfsfitvnm.vimusic
    printf "Removing Viper4Android...               "
    adb shell pm uninstall -k --user 0 com.wstxda.viper4android
+   printf "Removing Gamespace...                   "
+   adb shell pm uninstall -k --user 0 io.chaldeaprjkt.gamespace
    echo
 fi
 
