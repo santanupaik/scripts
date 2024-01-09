@@ -1,14 +1,14 @@
 #!/bin/bash
 
+# Check & grant sudo priviledges
+[ "$UID" -eq 0 ] || exec sudo "$0" "$@"
+
 # Intro Message
 printf "\nThis script will setup Nginx & UFW \nFor starters, set your domain name (example.com) WITHOUT any Sub-domain (www.)\n"
 
 # Get Domain Name from User
 printf "\nEnter Your Domain Name: " && read DOMAIN
 echo
-
-# Check & grant sudo priviledges
-[ "$UID" -eq 0 ] || exec sudo "$0" "$@"
 
 # Update & Install required Packages
 printf "\nUpdating & Installing Required Packages...\n"
