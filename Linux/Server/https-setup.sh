@@ -45,10 +45,6 @@ bash /root/.acme.sh/acme.sh \
 printf "\nCopying https config...\n"
 < https.conf tee /etc/nginx/sites-available/"$DOMAIN" >/dev/null
 
-# Verify Nginx config
-printf "Verifying Nginx Config..."
-nginx -t
-
 # Install the ssl/tls certificate in Nginx & reload it
 printf "\nInstalling the TLS Certificate...\n"
 bash /root/.acme.sh/acme.sh \
