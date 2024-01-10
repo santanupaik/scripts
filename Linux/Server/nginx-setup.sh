@@ -13,7 +13,7 @@ read -r DOMAIN
 # Update & Install required Packages
 printf "\nUpdating & Installing Required Packages...\n"
 sudo apt-get update
-sudo apt install git bc wget vim htop openssl curl socat rsync ufw nginx
+sudo apt install -y git bc wget vim htop openssl curl socat rsync ufw nginx
 
 # Start required Services
 printf "\nStarting Systemd Services...\n"
@@ -26,7 +26,7 @@ sudo systemctl enable --now ufw
 printf "\nSetting up UFW...\n"
 sudo ufw allow ssh
 sudo ufw allow 'Nginx Full'
-sudo ufw enable
+yes | sudo ufw enable
 
 # Create required directories
 printf "\nCreating Required Directories...\n"

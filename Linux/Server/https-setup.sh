@@ -39,7 +39,7 @@ bash /root/.acme.sh/acme.sh \
 --issue -d "$DOMAIN" \
 -d www."$DOMAIN" \
 -w /var/www/"$DOMAIN" \
--k 4096 --server letsencrypt
+-k 4096 --server letsencrypt --force
 
 # Copy https config to required place
 printf "\nCopying https config...\n"
