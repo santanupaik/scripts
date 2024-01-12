@@ -6,14 +6,32 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-# Intro Message
-printf "\nThis script will setup https with Nginx \nFor starters: Set your Email Address & Domain Name (example.com) WITHOUT any Sub-domain (www.)\n"
+# Variables
+DOMAIN=DOMAINSHOULDBECHANGED
+EMAIL=EMAILSHOULDBECHANGED
 
-# Get Email & Domain name from user
-printf "\nEnter Your Email Address: "
-read -r EMAIL
-printf "\nEnter Your Domain Name: "
-read -r DOMAIN
+# Get user confirmation for stored variables
+printf "\nStored credentials:\n"
+printf "\nDomain: %s\n" "$DOMAIN"
+printf "Email: %s\n\n" "$EMAIL"
+
+read -p "Are the Stored Credentials Correct ? (y/n): " -r ans
+case $ans in
+    [Yy]* ) printf "Great ! Proceeding with installation..."
+            ;;
+            
+    [Nn]* ) echo
+            read -p "Enter Your Email: " -r EMAIL
+	    read -p "Enter Your Domain: " -r DOMAIN
+	    ;;
+	    
+    * )     echo "Please re-run the script and answer in (y)es or (n)o."
+    	    exit 0
+    	    ;;
+esac
+
+# Intro Message
+printf "\nThis script will setup https with Nginx \n"
 
 # Set the Present Working Directory
 DIR=$(pwd)
@@ -45,7 +63,7 @@ bash /root/.acme.sh/acme.sh \
 
 # Copy https config to required place
 printf "\nCopying https config...\n"
-< https.conf tee /etc/nginx/sites-available/"$DOMAIN" >/dev/null
+< nginx-https.conf tee /etc/nginx/sites-available/"$DOMAIN" >/dev/null
 
 # Install the ssl/tls certificate in Nginx & reload it
 printf "\nInstalling the TLS Certificate...\n"

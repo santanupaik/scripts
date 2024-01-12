@@ -4,11 +4,11 @@
 [ "$UID" -eq 0 ] || exec sudo "$0" "$@"
 
 # Intro Message
-printf "\nThis script will setup Nginx & UFW \nFor starters, set your domain name (example.com) WITHOUT any Sub-domain (www.)\n"
+printf "\nThis script will setup Nginx & UFW \nSet your domain name (example.com) WITHOUT any Sub-domain (www.)\n\n"
 
 # Get Domain Name from User
-printf "\nEnter Your Domain Name: "
-read -r DOMAIN
+read -p "Enter Your Domain Name: " -r DOMAIN
+read -p "Enter Your Email ID: " -r EMAIL
 
 # Update & Install required Packages
 printf "\nUpdating & Installing Required Packages...\n"
@@ -35,10 +35,17 @@ sudo mkdir -p /etc/nginx/includes
 sudo mkdir -p /var/www/"$DOMAIN"/.well-known/acme-challenge/
 sudo mkdir -p /root/Server
 
+# Changing config files according to user input
+sed -i "s/DOMAIN/$DOMAIN/g" nginx-http.conf
+sed -i "s/DOMAIN/$DOMAIN/g" nginx-https.conf
+sed -i "s/DOMAIN/$DOMAIN/g" letsencrypt-webroot.conf
+sed -i "s/DOMAINSHOULDBECHANGED/$DOMAIN/g" nginx-https.sh
+sed -i "s/EMAILSHOULDBECHANGED/$EMAIL/g" nginx-https.sh
+
 # Move https related files to root
 printf "\nMoving https related files to root...\n"
-sudo mv https-setup.sh /root/Server/
-sudo mv https.conf /root/Server/
+sudo mv nginx-https.sh /root/Server/
+sudo mv nginx-https.conf /root/Server/
 
 # Set appropriate directory permissions
 printf "\nSetting Necessary Folder Permissions...\n"
@@ -49,9 +56,9 @@ sudo chmod -R 0555 /var/www/"$DOMAIN"/.well-known/acme-challenge/
 
 # Copy required configuration to their appropriate places
 printf "\nCopying required config files...\n"
-< website.conf tee /var/www/"$DOMAIN"/index.html >/dev/null
+< nginx-website.conf tee /var/www/"$DOMAIN"/index.html >/dev/null
 < letsencrypt-webroot.conf sudo tee /etc/nginx/includes/letsencrypt-webroot >/dev/null
-< http.conf sudo tee /etc/nginx/sites-available/"$DOMAIN" >/dev/null
+< nginx-http.conf sudo tee /etc/nginx/sites-available/"$DOMAIN" >/dev/null
 
 # Symlink nginx config
 printf "\nFinalizing Nginx Server Setup...\n"

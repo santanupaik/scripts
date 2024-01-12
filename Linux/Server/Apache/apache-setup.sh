@@ -3,7 +3,7 @@
 [ "$UID" -eq 0 ] || exec sudo "$0" "$@"
 
 # Intro Message
-printf "\nThis script will setup https with Apache2 \n Set your Email Address & Domain Name (example.com) WITHOUT any Sub-domain (www.)\n"
+printf "\nThis script will setup Apache2 & UFW \n Set your Email Address & Domain Name (example.com) WITHOUT any Sub-domain (www.)\n"
 
 # Get Domain name from user
 read -p "Enter Your Domain Name: " -r DOMAIN
