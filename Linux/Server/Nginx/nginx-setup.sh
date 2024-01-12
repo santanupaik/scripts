@@ -50,8 +50,8 @@ sudo chmod -R 0555 /var/www/"$DOMAIN"/.well-known/acme-challenge/
 # Copy required configuration to their appropriate places
 printf "\nCopying required config files...\n"
 < website.conf tee /var/www/"$DOMAIN"/index.html >/dev/null
-sudo cat letsencrypt-webroot.conf | sudo tee /etc/nginx/includes/letsencrypt-webroot >/dev/null
-sudo cat http.conf | sudo tee /etc/nginx/sites-available/"$DOMAIN" >/dev/null
+< letsencrypt-webroot.conf sudo tee /etc/nginx/includes/letsencrypt-webroot >/dev/null
+< http.conf sudo tee /etc/nginx/sites-available/"$DOMAIN" >/dev/null
 
 # Symlink nginx config
 printf "\nFinalizing Nginx Server Setup...\n"

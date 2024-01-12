@@ -36,10 +36,12 @@ cd "$DIR" || exit
 # Issue an ssl/tls Certificate from LetsEncrypt
 printf "\nIssuing TLS Certificate...\n"
 bash /root/.acme.sh/acme.sh \
---issue -d "$DOMAIN" \
+--issue \
+-d "$DOMAIN" \
 -d www."$DOMAIN" \
 -w /var/www/"$DOMAIN" \
--k 4096 --server letsencrypt --force
+-k 4096 \
+--server letsencrypt
 
 # Copy https config to required place
 printf "\nCopying https config...\n"
@@ -49,8 +51,8 @@ printf "\nCopying https config...\n"
 printf "\nInstalling the TLS Certificate...\n"
 bash /root/.acme.sh/acme.sh \
 --install-cert -d "$DOMAIN" \
---cert-file /etc/nginx/ssl/"$DOMAIN"/cert \
---key-file /etc/nginx/ssl/"$DOMAIN"/key \
---fullchain-file /etc/nginx/ssl/"$DOMAIN"/fullchain \
---reloadcmd "systemctl reload nginx.service"
+--cert-file /etc/nginx/ssl/"$DOMAIN"/"$DOMAIN".cert \
+--key-file /etc/nginx/ssl/"$DOMAIN"/"$DOMAIN".key \
+--fullchain-file /etc/nginx/ssl/"$DOMAIN"/"$DOMAIN".fullchain \
+--reloadcmd "systemctl restart nginx.service"
 
