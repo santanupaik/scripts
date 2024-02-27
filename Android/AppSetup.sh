@@ -67,9 +67,6 @@ if [ $dans == y ] || [ $dans == Y ]; then
    adb shell pm uninstall -k --user 0 com.wstxda.viper4android
    printf "Removing Gamespace...                   "
    adb shell pm uninstall -k --user 0 io.chaldeaprjkt.gamespace
-   printf "Removing Google Play Services...        "
-   adb shell pm uninstall -k --user 0 com.google.android.gms
-   adb shell pm uninstall -k --user 0 com.google.android.gsf
    echo
 fi
 
