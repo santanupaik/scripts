@@ -39,7 +39,6 @@ sed -i "s/DOMAINSHOULDBECHANGED/$DOMAIN/g" apache-https.sh
 sed -i "s/EMAILSHOULDBECHANGED/$EMAIL/g" apache-https.sh
 
 # Copy required config to the right places
-< apache-website.conf tee /var/www/"$DOMAIN"/index.html > /dev/null
 < apache-http.conf sudo tee /etc/apache2/sites-available/"$DOMAIN".conf > /dev/null
 mv apache-https.sh /root/Server/
 mv apache-https.conf /root/Server/
