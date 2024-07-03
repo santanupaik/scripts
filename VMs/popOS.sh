@@ -5,7 +5,7 @@ qemu-system-x86_64 \
 -M q35 \
 -m 8912 -smp 4 -cpu host \
 -bios /usr/share/edk2/x64/OVMF_CODE.fd \
--drive file=/home/$USER/vm/fs/popOS.qcow2,if=virtio \
+-drive file="$HOME"/vm/fs/popOS.qcow2,if=virtio \
 -usb \
 -device virtio-tablet \
 -device virtio-keyboard \
