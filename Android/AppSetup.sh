@@ -130,9 +130,8 @@ if [ $ians == y ] || [ $ians == Y ]; then
 fi
 
 # Rebooting the Device
-sleep 5; adb reboot
-echo "${bold}${b}Rebooting Device........."
-
+sleep 5; echo && echo "${bold}${b}Rebooting Device........."
+adb reboot
 # Exit Text
 echo
 echo "${bold}${y}Setup Complete !!${re}"
