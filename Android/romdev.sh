@@ -1,13 +1,15 @@
 #!/bin/bash
 
+sudo apt update && sudo apt upgrade
+sudo apt install -y bc bison build-essential ccache curl flex g++-multilib gcc-multilib git git-lfs gnupg gperf imagemagick lib32readline-dev lib32z1-dev libelf-dev liblz4-tool libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev llvm lib32ncurses5-dev libncurses5 libncurses5-dev python-is-python3 vim htop curl
+
 wget https://dl.google.com/android/repository/platform-tools-latest-linux.zip
 unzip -j platform-tools-latest-linux.zip -d ~/.local/bin
 
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.local/bin/repo
 chmod a+x ~/.local/bin/repo
 
-sudo apt update && sudo apt upgrade
-sudo apt install -y bc bison build-essential ccache curl flex g++-multilib gcc-multilib git git-lfs gnupg gperf imagemagick lib32readline-dev lib32z1-dev libelf-dev liblz4-tool libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev llvm lib32ncurses5-dev libncurses5 libncurses5-dev python-is-python3 vim htop
+sudo chown $USER:$USER -R /mnt
 
 cat >>~/.profile<< EOF
 export USE_CCACHE=1
@@ -16,11 +18,10 @@ export CCACHE_DIR=/mnt/ccache
 EOF
 source ~/.profile
 
-mkdir -pv ~/bin
 mkdir -pv ~/android/lineage
 
-read -pr "Enter your Git Username: " userName
-read -pr "Enter your Git Email: " userEmail
+read -p "Enter your Git Username: " userName
+read -p "Enter your Git Email: " userEmail
 git config --global user.email "$userEmail"
 git config --global user.name "$userName"
 
